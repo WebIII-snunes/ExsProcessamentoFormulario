@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Produto Cadastrado</title>
+</head>
+<body>
+<h2>Produto Cadastrado com Sucesso</h2>
+
+<p><strong>Nome:</strong> <span th:text="${product.nome}"></span></p>
+<p><strong>Categoria:</strong> <span th:text="${product.categoria}"></span></p>
+<p><strong>Preço:</strong> R$ <span th:text="${product.preco}"></span></p>
+<p><strong>Cor:</strong> <span th:text="${product.cor}"></span></p>
+
+<p><strong>Imagem:</strong></p>
+<img th:src="@{${imagemPath}}" alt="Imagem do produto" width="200"/>
+
+</body>
+</html>
