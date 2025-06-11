@@ -8,6 +8,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.nio.file.*;
+
+import org.springframework.validation.BindingResult;
+import jakarta.validation.Valid;
 @Controller
 @RequestMapping("/produtos")
 public class ProductController {
@@ -19,9 +22,18 @@ public class ProductController {
         return "product-cadastro";
     }
     @PostMapping("/salvar")
-    public String saveProduct(@ModelAttribute Product product, Model model) throws IOException {
+     public String saveProduct(@Valid @ModelAttribute("product") Product product,
+                              BindingResult result,
+                              Model model) throws IOException {
 
         MultipartFile imagem = product.getImagem();
+        if (imagem == null || imagem.isEmpty()) {
+            result.rejectValue("imagem", "imagem.vazia", "A imagem é obrigatória.");
+        }
+        if (result.hasErrors()) {
+            return "product-cadastro"; // volta com os erros
+        }
+
 
         if (imagem != null && !imagem.isEmpty()) {
             String fileName = imagem.getOriginalFilename();

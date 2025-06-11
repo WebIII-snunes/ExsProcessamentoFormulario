@@ -1,11 +1,21 @@
 package br.edu.ifpr.ex1.models;
 
 import org.springframework.web.multipart.MultipartFile;
+import jakarta.validation.constraints.*;
 public class Product {
+    @NotBlank(message = "Nome é obrigatório")
     private String nome;
+
+    @NotBlank(message = "Categoria é obrigatória")
     private String categoria;
+
+    @NotNull(message = "Preço é obrigatório")
+    @DecimalMin(value = "0.50", message = "Preço deve ser no mínimo R$ 0,50")
     private Double preco;
+
     private String cor;
+
+
     private MultipartFile imagem;
 
     // Getters e Setters

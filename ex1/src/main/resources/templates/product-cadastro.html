@@ -9,18 +9,20 @@
 
 <form th:action="@{/produtos/salvar}" method="post" th:object="${product}" enctype="multipart/form-data">
     <label>Nome:</label>
-    <input type="text" th:field="*{nome}" required><br><br>
-
+    <input type="text" th:field="*{nome}" ><br><br>
+    <div th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" style="color:red"></div>
     <label>Categoria:</label>
     <select th:field="*{categoria}">
         <option value="Vestuário">Vestuário</option>
         <option value="Eletrônico">Eletrônico</option>
         <option value="Jardim">Jardim</option>
     </select><br><br>
+    <div th:if="${#fields.hasErrors('categoria')}" th:errors="*{categoria}" style="color:red"></div><br>
 
     <label>Preço:</label>
-    <input type="number" th:field="*{preco}" step="0.01" required><br><br>
-
+    <input type="number" th:field="*{preco}" step="0.01" ><br><br>
+    <div th:if="${#fields.hasErrors('preco')}" th:errors="*{preco}" style="color:red"></div><br>
+    
     <label>Cor predominante:</label>
     <select th:field="*{cor}">
         <option value="azul">Azul</option>
@@ -28,9 +30,11 @@
         <option value="vermelha">Vermelha</option>
         <option value="verde">Verde</option>
     </select><br><br>
+    
 
     <label>Imagem:</label>
     <input type="file" th:field="*{imagem}" accept="image/*"><br><br>
+    <div th:if="${#fields.hasErrors('imagem')}" th:errors="*{imagem}" style="color:red"></div><br>
 
     <button type="submit">Cadastrar</button>
 </form>
